@@ -141,7 +141,8 @@ Events.SubscribeRemote("ListMapsRotation", ListMapsRotation)
 
 -- Function to broadcast available commands
 function BroadcastCommands()
-	local message = "<cyan>Available commands:</> <bold>!rtv</> - Rock the vote to change map\n<bold>!maps</> - List next 5 maps"
+	local message =
+	"<cyan>Available commands:</> <bold>!rtv</> - Rock the vote to change map\n<bold>!maps</> - List next 5 maps"
 	Chat.BroadcastMessage(message)
 end
 
