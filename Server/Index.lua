@@ -63,8 +63,8 @@ function RockTheVote(player)
 		currentVotes = currentVotes + 1
 	end
 
-	-- Calculate votes needed (90% of players, rounded up)
-	local votesNeeded = math.ceil(totalPlayers * 0.9)
+	-- Calculate votes needed (90% of players + 1, capped at total players)
+	local votesNeeded = math.min(math.ceil(totalPlayers * 0.9) + 1, totalPlayers)
 
 	-- Check if threshold is met
 	if currentVotes >= votesNeeded then
@@ -138,3 +138,14 @@ end
 
 Events.SubscribeRemote("RockTheVote", RockTheVote)
 Events.SubscribeRemote("ListMapsRotation", ListMapsRotation)
+
+-- Function to broadcast available commands
+function BroadcastCommands()
+	local message = "<cyan>Available commands:</> <bold>!rtv</> - Rock the vote to change map\n<bold>!maps</> - List next 5 maps"
+	Chat.BroadcastMessage(message)
+end
+
+-- Set up timer to broadcast commands every 2.5 minutes (150 seconds)
+Timer.SetInterval(function()
+	BroadcastCommands()
+end, 150000)
